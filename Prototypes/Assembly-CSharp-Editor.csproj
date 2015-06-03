@@ -101,6 +101,21 @@
  <Reference Include="UnityEditor.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll</HintPath>
  </Reference>
+ <Reference Include="ProBuilderCore-Unity5">
+ <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
+ </Reference>
+ <Reference Include="ProBuilderMeshOps-Unity5">
+ <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
+ </Reference>
+ <Reference Include="ProBuilderEditor-Unity5">
+ <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Prototype/Editor/ProBuilderEditor-Unity5.dll</HintPath>
+ </Reference>
+ <Reference Include="ProCore">
+ <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Shared/Code/ProCore.dll</HintPath>
+ </Reference>
+ <Reference Include="pb_Profiler">
+ <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Shared/pb_Profiler/pb_Profiler.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
  </Reference>
@@ -133,21 +148,6 @@
  </Reference>
  <Reference Include="UnityEditor.OSXStandalone.Extensions">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/macstandalonesupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
- </Reference>
- <Reference Include="ProCore">
- <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Shared/Code/ProCore.dll</HintPath>
- </Reference>
- <Reference Include="ProBuilderMeshOps-Unity5">
- <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
- </Reference>
- <Reference Include="ProBuilderCore-Unity5">
- <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
- </Reference>
- <Reference Include="ProBuilderEditor-Unity5">
- <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Prototype/Editor/ProBuilderEditor-Unity5.dll</HintPath>
- </Reference>
- <Reference Include="pb_Profiler">
- <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Shared/pb_Profiler/pb_Profiler.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iossupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
