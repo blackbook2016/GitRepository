@@ -1,10 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\GameCamera\Scripts\CameraManager.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\New Unity Project 1\Assets\Example\Scripts\ObjectPooler.cs">
     <Files>
-      <File FileName="Assets\Prototypes\Proto1_Deplacement\Scripts\CapsuleController.cs" Line="20" Column="25" />
-      <File FileName="..\..\Desktop\SOL\states_of_light\Assets\Scripts\Light\LaserScript.cs" Line="147" Column="1" />
-      <File FileName="Assets\GameCamera\Scripts\CameraManager.cs" Line="307" Column="10" />
+      <File FileName="..\..\New Unity Project 1\Assets\Example\Scripts\ObjectPooler.cs" Line="25" Column="27" />
+      <File FileName="..\..\New Unity Project 1\Assets\Example\Scripts\OrbitCamera.cs" Line="10" Column="1" />
+      <File FileName="..\..\New Unity Project 1\Assets\Example\Scripts\OverlayOnMesh.cs" Line="27" Column="20" />
+      <File FileName="..\..\New Unity Project 1\Assets\Example\Scripts\Shooter.cs" Line="5" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
