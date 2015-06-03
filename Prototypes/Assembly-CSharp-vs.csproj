@@ -165,9 +165,35 @@
      <Compile Include="Assets\GameCamera\Scripts\Utils\Popup.cs" />
      <Compile Include="Assets\GameCamera\Scripts\Utils\Profiler.cs" />
      <Compile Include="Assets\GameCamera\Scripts\Utils\RingPrimitive.cs" />
+     <Compile Include="Assets\Prototypes\Proto1_Deplacement\Scripts\CapsuleController.cs" />
+     <None Include="Assets\ProCore\Prototype\About\changelog.txt" />
+     <None Include="Assets\ProCore\Prototype\Shader\DiffuseVertexColor.shader" />
+     <None Include="Assets\ProCore\Shared\About\README.txt" />
+     <None Include="Assets\ProCore\Prototype\Shader\DiffuseVertexColorTransparency.shader" />
+     <None Include="Assets\ProCore\Prototype\Shader\pb_FaceHighlight.shader" />
+     <None Include="Assets\ProCore\Prototype\Shader\UnlitSolidColor.shader" />
+     <None Include="Assets\ProCore\Prototype\Shader\DiffuseTextureBlend.shader" />
      <None Include="Assets\GameCamera\Content\Demo\Shaders\Projector Light.shader" />
+     <None Include="Assets\ProCore\Prototype\Shader\pb_UnlitVertexColor.shader" />
+     <None Include="Assets\ProCore\Prototype\About\pc_AboutEntry_ProBuilder.txt" />
+     <None Include="Assets\ProCore\Prototype\Shader\pb_VertexShader.shader" />
+     <None Include="Assets\ProCore\_README_PROTOTYPE.txt" />
+     <None Include="Assets\ProCore\Prototype\Shader\DiffuseVertexColorEmission.shader" />
+     <None Include="Assets\ProCore\Prototype\About\Credits.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="ProCore">
+ <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Shared/Code/ProCore.dll</HintPath>
+ </Reference>
+ <Reference Include="ProBuilderMeshOps-Unity5">
+ <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
+ </Reference>
+ <Reference Include="ProBuilderCore-Unity5">
+ <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
+ </Reference>
+ <Reference Include="pb_Profiler">
+ <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Shared/pb_Profiler/pb_Profiler.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iossupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
