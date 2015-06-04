@@ -11114,6 +11114,48 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
+--- !u!1001 &955094324
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 477936, guid: 62116b718008bb6429609e1a69cb492d, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -2.73794556
+      objectReference: {fileID: 0}
+    - target: {fileID: 477936, guid: 62116b718008bb6429609e1a69cb492d, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 477936, guid: 62116b718008bb6429609e1a69cb492d, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -6.31358337
+      objectReference: {fileID: 0}
+    - target: {fileID: 477936, guid: 62116b718008bb6429609e1a69cb492d, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 477936, guid: 62116b718008bb6429609e1a69cb492d, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 477936, guid: 62116b718008bb6429609e1a69cb492d, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 477936, guid: 62116b718008bb6429609e1a69cb492d, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 477936, guid: 62116b718008bb6429609e1a69cb492d, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 62116b718008bb6429609e1a69cb492d, type: 2}
+  m_IsPrefabParent: 0
 --- !u!43 &960597347
 Mesh:
   m_ObjectHideFlags: 0
@@ -18501,7 +18543,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!43 &1347782542
 Mesh:
   m_ObjectHideFlags: 0
@@ -20021,7 +20063,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!195 &1470988644
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -20098,7 +20140,7 @@ Transform:
   m_Children:
   - {fileID: 1684032484}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!114 &1470988649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20110,6 +20152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7db5241dd07da8540a3980f9d7760651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkSpeed: 3
+  runSpeed: 15
+  state: 0
 --- !u!43 &1508876193
 Mesh:
   m_ObjectHideFlags: 0
@@ -24382,7 +24427,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!43 &1844636442
 Mesh:
   m_ObjectHideFlags: 0
@@ -27442,7 +27487,7 @@ Transform:
   - {fileID: 1215727148}
   - {fileID: 232831964}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!1 &2010403312
 GameObject:
   m_ObjectHideFlags: 0

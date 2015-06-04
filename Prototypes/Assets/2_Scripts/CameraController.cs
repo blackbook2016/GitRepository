@@ -5,6 +5,7 @@
 
 	public class CameraController : MonoBehaviour {
 
+		#region Properties
 		[Header("Configuration")]
 		[SerializeField]
 		[Tooltip("Camera limits in width and length")]
@@ -34,14 +35,37 @@
 		[Header("Function")]
 		[SerializeField]
 		bool draggable = true;
+		[SerializeField]
+		bool mouseBorders = true;
+		#endregion
 
+		#region Events
+		#endregion
+		
+		#region Editor API
+		#endregion
+		
+		#region API
+		#endregion
+
+		#region Unity
 		void Update()
 		{
+			UpdateCamera();
+		}
+		#endregion
+
+		#region Handlers
+		#endregion
+		
+		#region Private
+		void UpdateCamera()
+		{
 			Vector3 translation = Vector3.zero;
-
-
+			
+			
 			float zoomDelta = Input.GetAxis("Mouse ScrollWheel") * ZoomSpeed * Time.deltaTime;
-
+			
 			if (zoomDelta!=0)
 			{
 				translation -= Vector3.up * ZoomSpeed * zoomDelta;
@@ -66,7 +90,7 @@
 				translation -= new Vector3(Input.GetAxis("Mouse X") * DragSpeed * Time.deltaTime, 0,
 				                           Input.GetAxis("Mouse Y") * DragSpeed * Time.deltaTime);
 			}
-			else
+			else if (mouseBorders)
 			{
 				// Move camera if mouse pointer reaches screen borders
 				if (Input.mousePosition.x < ScrollArea)
@@ -104,8 +128,9 @@
 			{
 				translation.z = 0;
 			}
-
+			
 			transform.position += translation;
 		}
+		#endregion
 	}
 }

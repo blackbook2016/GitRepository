@@ -23,6 +23,9 @@
 		[SerializeField]
 		State state = State.Idle;
 
+
+		public NavMesh navmesh;
+
 		private float lastClickTime = 0F;
 		private NavMeshAgent agent;
 		#endregion
@@ -46,6 +49,15 @@
 				agent.SetDestination(transform.position);
 				state = State.Idle;
 			}
+			if (agent.hasPath)
+			{		
+				agent.updateRotation = false;
+				//set the rotation in the direction of movement
+				transform.rotation = Quaternion.LookRotation(agent.desiredVelocity);
+				//set the navAgent's velocity to the velocity of the animation clip currently playing
+				//print(agent.desiredVelocity);
+				agent.velocity = agent.desiredVelocity;
+			}
 		}
 		#endregion
 
@@ -53,7 +65,6 @@
 
 		void MovePlayer()
 		{
-			//Vector3 destination ?= RetrieveMousePosition()
 			agent.SetDestination(RetrieveMousePosition());
 			//agent.Resume();
 
@@ -77,8 +88,12 @@
 			Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 
+			//(Physics.Raycast(mouseRay, out hit,100,LayerMask.NameToLayer("Floor")))
 			if(Physics.Raycast(mouseRay, out hit))
+			{
+				Debug.DrawRay(Camera.main.transform.position, hit.point, Color.red, 5, false);
 				return hit.point;
+			}
 			
 			return transform.position;
 		}
