@@ -44,16 +44,16 @@
 			if(Input.GetKeyDown(KeyCode.Mouse0))	
 				MovePlayer();
 
-			if(Input.GetKeyDown(KeyCode.Mouse1))
+			if(Input.GetKeyUp(KeyCode.Mouse1))
 			{
 				agent.SetDestination(transform.position);
 				state = State.Idle;
 			}
 			if (agent.hasPath)
 			{		
-				agent.updateRotation = false;
+				//agent.updateRotation = false;
 				//set the rotation in the direction of movement
-				transform.rotation = Quaternion.LookRotation(agent.desiredVelocity);
+				//transform.rotation = Quaternion.LookRotation(agent.desiredVelocity);
 				//set the navAgent's velocity to the velocity of the animation clip currently playing
 				//print(agent.desiredVelocity);
 				agent.velocity = agent.desiredVelocity;

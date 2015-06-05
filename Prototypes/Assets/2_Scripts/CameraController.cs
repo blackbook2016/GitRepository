@@ -3,6 +3,18 @@
 	using UnityEngine;
 	using System.Collections;
 
+	public struct TargetDestination
+	{
+		public Vector3 position;
+		public Vector3 eulerAngles;
+
+		public TargetDestination(Vector3 position,Vector3 eulerAngles)
+		{
+			this.position = position;
+			this.eulerAngles = eulerAngles;
+		}
+	}
+
 	public class CameraController : MonoBehaviour {
 
 		#region Properties
@@ -37,6 +49,8 @@
 		bool draggable = true;
 		[SerializeField]
 		bool mouseBorders = true;
+
+		private TargetDestination target = new TargetDestination(Vector3.zero,Vector3.zero);
 		#endregion
 
 		#region Events
@@ -49,6 +63,13 @@
 		#endregion
 
 		#region Unity
+
+		void Start()
+		{
+			target.position = transform.position;
+			target.eulerAngles.x = 45;
+		}
+
 		void Update()
 		{
 			UpdateCamera();
@@ -64,20 +85,26 @@
 			Vector3 translation = Vector3.zero;
 			
 			
-			float zoomDelta = Input.GetAxis("Mouse ScrollWheel") * ZoomSpeed * Time.deltaTime;
-			
-			if (zoomDelta!=0)
+
+			if(Input.GetAxis("Mouse ScrollWheel")!=0)
 			{
-				translation -= Vector3.up * ZoomSpeed * zoomDelta;
-			}
-			
-			// Start panning camera if zooming in close to the ground or if just zooming out.
-			float pan = GetComponent<Camera>().transform.eulerAngles.x - zoomDelta * PanSpeed;
-			pan = Mathf.Clamp(pan, PanAngleMin, PanAngleMax);
-			//print (pan + " " + (ZoomMin+((ZoomMax-ZoomMin)/2)) + " " + zoomDelta);
-			if (zoomDelta < 0 || GetComponent<Camera>().transform.position.y < (ZoomMin+((ZoomMax-ZoomMin)/2)))
-			{
-				GetComponent<Camera>().transform.eulerAngles = new Vector3(pan, 0, 0);
+				float zoomDelta = Input.GetAxis("Mouse ScrollWheel") * ZoomSpeed * Time.deltaTime;
+				
+				if (zoomDelta!=0)
+				{
+					translation -= Vector3.up * ZoomSpeed * zoomDelta;
+				}
+				
+				// Start panning camera if zooming in close to the ground or if just zooming out.
+				float pan = transform.eulerAngles.x - zoomDelta * PanSpeed;
+				pan = Mathf.Clamp(pan, PanAngleMin, PanAngleMax);
+				//print (pan + " " + (ZoomMin+((ZoomMax-ZoomMin)/2)) + " " + zoomDelta);
+				if (zoomDelta < 0 || target.position.y < (ZoomMin+((ZoomMax-ZoomMin)/2)))
+				{
+					//camera.transform.eulerAngles = new Vector3(pan, 0, 0);
+					target.eulerAngles.x = (int)pan;
+				}
+
 			}
 			
 			// Move camera with arrow keys
@@ -115,7 +142,7 @@
 			}
 			
 			// Keep camera within level and zoom area
-			Vector3 desiredPosition = GetComponent<Camera>().transform.position + translation;
+			Vector3 desiredPosition = target.position + translation;
 			if (desiredPosition.x < -LevelArea || LevelArea < desiredPosition.x)
 			{
 				translation.x = 0;
@@ -128,8 +155,11 @@
 			{
 				translation.z = 0;
 			}
-			
-			transform.position += translation;
+			Vector3 velocity = Vector3.zero;
+			target.position += translation;
+				//transform.position = Vector3.SmoothDamp(transform.position, transform.position + translation, ref velocity, 0.3F);
+			transform.eulerAngles = Vector3.Lerp (transform.eulerAngles, target.eulerAngles, Time.deltaTime * 15);
+			transform.position = Vector3.Lerp (transform.position, target.position, Time.deltaTime * 1.5F);
 		}
 		#endregion
 	}
