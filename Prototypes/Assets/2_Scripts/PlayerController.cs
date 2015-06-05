@@ -63,23 +63,23 @@
 				//print(agent.desiredVelocity);
 
 				agent.velocity = agent.desiredVelocity;
-//				if(agent.remainingDistance < 5)
+				if(agent.remainingDistance < 3)
+					agent.velocity = Vector3.Normalize(agent.desiredVelocity) * agent.speed * agent.remainingDistance / 3;
 
-//				if(double.IsNaN(pathDistance) || double.IsInfinity(pathDistance))
+//				if(double.IsNaN(pathDistance) || double.IsInfinity(pathDistance) || pathDistance <= 0.5F)
 //				{
 //					if(!double.IsNaN(agent.remainingDistance) && !double.IsInfinity(agent.remainingDistance))
 //					{
 //						pathDistance = agent.remainingDistance;
 //						agent.velocity = Vector3.Normalize(agent.desiredVelocity) * agent.speed * agent.remainingDistance / pathDistance;
 //					}
-//				}
-//				if(!double.IsNaN(pathDistance) && !double.IsInfinity(pathDistance))
-//				{
+//				}else
 //					if(!double.IsNaN(agent.remainingDistance) && !double.IsInfinity(agent.remainingDistance))
 //					{
+//						print(agent.remainingDistance + "  " + pathDistance);
 //						agent.velocity = Vector3.Normalize(agent.desiredVelocity) * agent.speed * agent.remainingDistance / pathDistance;
 //					}
-//				}
+
 
 			}
 		}
@@ -105,8 +105,6 @@
 				agent.speed = walkSpeed;
 			}
 			lastClickTimeL = Time.time;
-			pathDistance = 0;
-			pathDistance = agent.remainingDistance;
 		}
 
 		void StopPlayer()
