@@ -26,7 +26,9 @@
 
 		public NavMesh navmesh;
 
-		private float lastClickTime = 0F;
+		private float lastClickTimeL = 0F;
+		private float lastClickTimeR = 0F;
+		private float pathDistance = 0F;
 		private NavMeshAgent agent;
 		#endregion
 
@@ -44,11 +46,14 @@
 			if(Input.GetKeyDown(KeyCode.Mouse0))	
 				MovePlayer();
 
-			if(Input.GetKeyUp(KeyCode.Mouse1))
-			{
-				agent.SetDestination(transform.position);
-				state = State.Idle;
-			}
+			if(Input.GetKeyDown(KeyCode.Mouse1))
+				lastClickTimeR = Time.time;
+
+			if(Input.GetKeyUp(KeyCode.Mouse1) && Time.time < lastClickTimeR + delay)
+				StopPlayer();
+
+
+
 			if (agent.hasPath)
 			{		
 				//agent.updateRotation = false;
@@ -56,7 +61,26 @@
 				//transform.rotation = Quaternion.LookRotation(agent.desiredVelocity);
 				//set the navAgent's velocity to the velocity of the animation clip currently playing
 				//print(agent.desiredVelocity);
+
 				agent.velocity = agent.desiredVelocity;
+//				if(agent.remainingDistance < 5)
+
+//				if(double.IsNaN(pathDistance) || double.IsInfinity(pathDistance))
+//				{
+//					if(!double.IsNaN(agent.remainingDistance) && !double.IsInfinity(agent.remainingDistance))
+//					{
+//						pathDistance = agent.remainingDistance;
+//						agent.velocity = Vector3.Normalize(agent.desiredVelocity) * agent.speed * agent.remainingDistance / pathDistance;
+//					}
+//				}
+//				if(!double.IsNaN(pathDistance) && !double.IsInfinity(pathDistance))
+//				{
+//					if(!double.IsNaN(agent.remainingDistance) && !double.IsInfinity(agent.remainingDistance))
+//					{
+//						agent.velocity = Vector3.Normalize(agent.desiredVelocity) * agent.speed * agent.remainingDistance / pathDistance;
+//					}
+//				}
+
 			}
 		}
 		#endregion
@@ -68,19 +92,27 @@
 			agent.SetDestination(RetrieveMousePosition());
 			//agent.Resume();
 
-			if(state != State.Run && Time.time - lastClickTime < delay)
+			if(state != State.Run && Time.time - lastClickTimeL < delay)
 			{
 				//agent.velocity = Vector3.forward * runSpeed;
 				state = State.Run;
 				agent.speed = runSpeed;
 			}
-			else if(state != State.Walk && Time.time - lastClickTime >= delay)
+			else if(state != State.Walk && Time.time - lastClickTimeL >= delay)
 			{
 				//agent.velocity = Vector3.forward * walkSpeed;
 				state = State.Walk;
 				agent.speed = walkSpeed;
 			}
-			lastClickTime = Time.time;
+			lastClickTimeL = Time.time;
+			pathDistance = 0;
+			pathDistance = agent.remainingDistance;
+		}
+
+		void StopPlayer()
+		{
+			agent.SetDestination(transform.position);
+			state = State.Idle;
 		}
 		
 		Vector3 RetrieveMousePosition()
@@ -91,7 +123,7 @@
 			//(Physics.Raycast(mouseRay, out hit,100,LayerMask.NameToLayer("Floor")))
 			if(Physics.Raycast(mouseRay, out hit))
 			{
-				Debug.DrawRay(Camera.main.transform.position, hit.point, Color.red, 5, false);
+				//Debug.DrawRay(Camera.main.transform.position, hit.point, Color.red, 5, false);
 				return hit.point;
 			}
 			

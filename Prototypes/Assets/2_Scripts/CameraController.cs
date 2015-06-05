@@ -49,14 +49,25 @@
 		bool draggable = true;
 		[SerializeField]
 		bool mouseBorders = true;
+		[SerializeField]
+		bool playCinematique = false;
+		[SerializeField]
+		Transform cinematiqueTarget;
 
-		private TargetDestination target = new TargetDestination(Vector3.zero,Vector3.zero);
+		private TargetDestination td = new TargetDestination(Vector3.zero,Vector3.zero);
+		private bool isplayingCinematique = false;
+
+		private float smooth = 1.5f;
 		#endregion
 
 		#region Events
 		#endregion
 		
 		#region Editor API
+		void OnGUI()
+		{
+
+		}
 		#endregion
 		
 		#region API
@@ -66,13 +77,24 @@
 
 		void Start()
 		{
-			target.position = transform.position;
-			target.eulerAngles.x = 45;
+			td.position = transform.position;
+			td.eulerAngles.x = Mathf.Clamp(transform.eulerAngles.x, PanAngleMin, PanAngleMax);
+			transform.eulerAngles = td.eulerAngles;
 		}
 
 		void Update()
 		{
-			UpdateCamera();
+			if(!isplayingCinematique)
+			{
+				if(playCinematique && cinematiqueTarget )
+				{
+					isplayingCinematique = true;
+					StopCoroutine("PlayCinematique");
+					StartCoroutine("PlayCinematique", cinematiqueTarget);
+				}
+				else
+					UpdateCamera();
+			}
 		}
 		#endregion
 
@@ -83,8 +105,6 @@
 		void UpdateCamera()
 		{
 			Vector3 translation = Vector3.zero;
-			
-			
 
 			if(Input.GetAxis("Mouse ScrollWheel")!=0)
 			{
@@ -98,11 +118,11 @@
 				// Start panning camera if zooming in close to the ground or if just zooming out.
 				float pan = transform.eulerAngles.x - zoomDelta * PanSpeed;
 				pan = Mathf.Clamp(pan, PanAngleMin, PanAngleMax);
-				//print (pan + " " + (ZoomMin+((ZoomMax-ZoomMin)/2)) + " " + zoomDelta);
-				if (zoomDelta < 0 || target.position.y < (ZoomMin+((ZoomMax-ZoomMin)/2)))
+
+				if (zoomDelta < 0 || td.position.y < (ZoomMin+((ZoomMax-ZoomMin)/2)))
 				{
 					//camera.transform.eulerAngles = new Vector3(pan, 0, 0);
-					target.eulerAngles.x = (int)pan;
+					td.eulerAngles.x = (int)pan;
 				}
 
 			}
@@ -142,7 +162,7 @@
 			}
 			
 			// Keep camera within level and zoom area
-			Vector3 desiredPosition = target.position + translation;
+			Vector3 desiredPosition = td.position + translation;
 			if (desiredPosition.x < -LevelArea || LevelArea < desiredPosition.x)
 			{
 				translation.x = 0;
@@ -155,11 +175,44 @@
 			{
 				translation.z = 0;
 			}
-			Vector3 velocity = Vector3.zero;
-			target.position += translation;
-				//transform.position = Vector3.SmoothDamp(transform.position, transform.position + translation, ref velocity, 0.3F);
-			transform.eulerAngles = Vector3.Lerp (transform.eulerAngles, target.eulerAngles, Time.deltaTime * 15);
-			transform.position = Vector3.Lerp (transform.position, target.position, Time.deltaTime * 1.5F);
+
+			td.position += translation;
+			transform.eulerAngles = Vector3.Lerp (transform.eulerAngles, td.eulerAngles, Time.deltaTime * 15);
+			transform.position = Vector3.Lerp (transform.position, td.position, Time.deltaTime * smooth);
+		}
+
+		IEnumerator PlayCinematique(Transform target)
+		{
+			TargetDestination initial = new TargetDestination(transform.position,transform.eulerAngles);
+
+			float distance = Vector3.Distance(transform.position, target.position);
+			float maxdistance = distance;
+			while(distance> 2 * maxdistance /10)
+			{
+				SmoothLookAt(target);
+				transform.position = Vector3.Lerp(transform.position, target.position, Time.deltaTime * distance / maxdistance);
+				distance = Vector3.Distance(transform.position, target.position);
+				yield return null;
+			}
+			
+			print ("WaitForSeconds");
+			yield return new WaitForSeconds(3f);
+			
+			print ("finished");
+			playCinematique = false;
+			isplayingCinematique = false;
+		}
+
+		void SmoothLookAt (Transform target)
+		{
+			// Create a vector from the camera towards the player.
+			Vector3 relPlayerPosition = target.position - transform.position;
+			
+			// Create a rotation based on the relative position of the player being the forward vector.
+			Quaternion lookAtRotation = Quaternion.LookRotation(relPlayerPosition, Vector3.up);
+			
+			// Lerp the camera's rotation between it's current rotation and the rotation that looks at the player.
+			transform.rotation = Quaternion.Lerp(transform.rotation, lookAtRotation, smooth * Time.deltaTime);
 		}
 		#endregion
 	}
