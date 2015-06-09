@@ -1,9 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\2_Scripts\PlayerController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\2_Scripts\CameraController.cs">
     <Files>
-      <File FileName="Assets\2_Scripts\PlayerController.cs" Line="66" Column="1" />
-      <File FileName="Assets\2_Scripts\CameraController.cs" Line="136" Column="40" />
+      <File FileName="Assets\2_Scripts\PlayerController.cs" Line="118" Column="1" />
+      <File FileName="Assets\2_Scripts\CameraController.cs" Line="269" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

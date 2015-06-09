@@ -28,7 +28,7 @@
 
 		private float lastClickTimeL = 0F;
 		private float lastClickTimeR = 0F;
-		private float pathDistance = 0F;
+		//private float pathDistance = 0F;
 		private NavMeshAgent agent;
 		#endregion
 
