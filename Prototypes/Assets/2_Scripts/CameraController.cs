@@ -46,6 +46,8 @@
 
 		[SerializeField]
 		int RotSpeed = 25;
+		[SerializeField]
+		float smooth = 9f;
 
 		[Header("Function")]
 		[SerializeField]
@@ -61,8 +63,6 @@
 
 		private TargetDestination td = new TargetDestination(Vector3.zero,Vector3.zero);
 		private bool isplayingCinematique = false;
-
-		private float smooth = 1.5f;
 		private Vector3 rotationTarget = Vector3.zero;
 		#endregion
 
@@ -112,16 +112,19 @@
 		void UpdateCamera()
 		{
 			Vector3 translation = Vector3.zero;
-			
+
+			/////////////////////////////////////////////////////   MOVE CAMERA      ////////////////////////////////////////////////////////////////
+
 			// Move camera with arrow keys
-			translation += new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-			
+			translation += Input.GetAxis("Horizontal") * Vector3.right;
+			translation += Input.GetAxis("Vertical") * Vector3.forward;
+
 			// Move camera with mouse
 			if (Input.GetKey(KeyCode.Mouse1) && draggable) 
 			{
 				// Hold button and drag camera around
-				translation -= new Vector3(Input.GetAxis("Mouse X") * DragSpeed * Time.deltaTime, 0,
-				                           Input.GetAxis("Mouse Y") * DragSpeed * Time.deltaTime);
+				translation -= Input.GetAxis("Mouse X") * DragSpeed * Time.deltaTime * Vector3.right;
+				translation -= Input.GetAxis("Mouse Y") * DragSpeed * Time.deltaTime * Vector3.forward;
 			}
 			else if (mouseBorders)
 			{
@@ -147,81 +150,61 @@
 				}
 			}
 
+			/////////////////////////////////////////////////////   ROTATE CAMERA     ///////////////////////////////////////////////////////////////////////////
+		
+
 			translation = Camera.main.transform.TransformDirection(translation);
 			translation.y = 0;
 
-			if(Input.GetAxis("Mouse ScrollWheel")!=0)
+			if(NewCameraRotation)
 			{
-				float zoomDelta = Input.GetAxis("Mouse ScrollWheel") * ZoomSpeed * Time.deltaTime;
-				
-				if (zoomDelta!=0)
+				//Zoom In/Out
+				if(Input.GetAxis("Mouse ScrollWheel")!=0)
 				{
-					translation -= Vector3.up * ZoomSpeed * zoomDelta;
+					float zoomDelta = Input.GetAxis("Mouse ScrollWheel") * ZoomSpeed * Time.deltaTime;
+
+
+					if( Input.GetAxis("Mouse ScrollWheel") > 0 && td.position.y + (transform.forward.y * ZoomSpeed * zoomDelta) <= ZoomMin){}								
+					else
+						translation += transform.forward * ZoomSpeed * zoomDelta;
 				}
-				
-				// Start panning camera if zooming in close to the ground or if just zooming out.
-				float pan = transform.eulerAngles.x - zoomDelta * PanSpeed;
-				pan = Mathf.Clamp(pan, PanAngleMin, PanAngleMax);
-				
-				if (zoomDelta < 0 || td.position.y < (ZoomMin+((ZoomMax-ZoomMin)/2)))
+
+				if(Input.GetKey(KeyCode.Mouse2))
 				{
-					//camera.transform.eulerAngles = new Vector3(pan, 0, 0);
-					//td.eulerAngles.x = (int)pan;
+					translation = Vector2.zero;
+					//translation -= transform.right * Input.GetAxis("Mouse X") * RotSpeed * 0.1f;
+
+					translation -= transform.up * Input.GetAxis("Mouse Y") * RotSpeed * 0.1f;
 				}
-				
 			}
-			//CAMERA MOVEMENT CONTROLS
-//			float MoveVertical = Input.GetAxis("Vertical")  * Time.deltaTime;
-//			float MoveHorizontal = Input.GetAxis("Horizontal") * Time.deltaTime;
-//			CameraHolder.transform.Translate (Vector3.forward * MoveVertical);
-//			CameraHolder.transform.Translate (Vector3.right * MoveHorizontal);
-//			float Rotation = Input.GetAxis("Mouse X");
-//			if (Input.GetKey(KeyCode.Mouse2))
-//			{
-//				CameraHolder.transform.Rotate(Vector3.up, Rotation * CameraRotateSpeed * Time.deltaTime,Space.World);
-//			}
-			//Camera Rotation on Y axis
-			if(Input.GetKey(KeyCode.Mouse2))
+			else
 			{
-				if(NewCameraRotation)
+				//Zoom In/Out
+				if(Input.GetAxis("Mouse ScrollWheel")!=0)
 				{
+					float zoomDelta = Input.GetAxis("Mouse ScrollWheel") * ZoomSpeed * Time.deltaTime;
 
-					Ray ray = new Ray(transform.position,transform.forward);
-					// create a plane at 0,0,0 whose normal points to +Y:
-					Plane hPlane = new Plane(Vector3.up, Vector3.zero);
-					// Plane.Raycast stores the distance from ray.origin to the hit point in this variable:
-					float distance = 0; 
-					// if the ray hits the plane...
-					if (hPlane.Raycast(ray, out distance)){
-						// get the hit point:
-						rotationTarget = ray.GetPoint(distance);
-					}
+					translation -= Vector3.up * ZoomSpeed * zoomDelta;	
 
-//					Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-//					RaycastHit hit;
+					// Start panning camera if zooming in close to the ground or if just zooming out.
+					float pan = transform.eulerAngles.x - zoomDelta * PanSpeed;
+					pan = Mathf.Clamp(pan, PanAngleMin, PanAngleMax);
 					
-//					(Physics.Raycast(mouseRay, out hit,100,LayerMask.NameToLayer("Floor")))
-//					if(Physics.Raycast(transform.position,transform.forward, out hit))
-//					{
-//					transform.RotateAround (new Vector3(0,transform.localEulerAngles.y,0),Vector3.up, Input.GetAxis("Mouse X") * Time.deltaTime * 20);
-//					Vector3 _direction = (Vector3.zero - transform.position).normalized;
-//					Quaternion lookRot = Quaternion.LookRotation(_direction);
-//					perform rotation-over-time on rot variable
-//					td.eulerAngles = lookRot.eulerAngles;
-//					transform.rotation = lookRot;
-//
-//					transform.Translate(Vector3.right * Time.deltaTime);
-//						rotationTarget = hit.point;
-//					}
-					translation += transform.right * Input.GetAxis("Mouse X") ;
+					if (zoomDelta < 0 || td.position.y < (ZoomMin+((ZoomMax-ZoomMin)/2)))
+					{
+						//camera.transform.eulerAngles = new Vector3(pan, 0, 0);
+						td.eulerAngles.x = (int)pan;
+					}		
 				}
-				else
+
+				if(Input.GetKey(KeyCode.Mouse2))
 				{
 					td.eulerAngles.y += Input.GetAxis("Mouse X") * RotSpeed;
 				}
-
 			}
-			
+
+			/////////////////////////////////////////////////////   CHECK CAMERA BOUNDARIES     ///////////////////////////////////////////////////////////////////
+
 			// Keep camera within level and zoom area
 			Vector3 desiredPosition = td.position + translation;
 			if (desiredPosition.x < -LevelArea || LevelArea < desiredPosition.x)
@@ -236,19 +219,189 @@
 			{
 				translation.z = 0;
 			}
-
+						
 			td.position += translation;
-
-
-			transform.position = Vector3.Slerp (transform.position, td.position, smooth);
-			transform.rotation = Quaternion.Lerp (Quaternion.Euler(transform.eulerAngles), Quaternion.Euler(td.eulerAngles), Time.deltaTime * 15);
-			if(Input.GetKey(KeyCode.Mouse2) || Input.GetAxis("Mouse ScrollWheel")!=0)
+			if(Input.GetKey(KeyCode.Mouse2) && NewCameraRotation)
 			{
-				transform.LookAt(rotationTarget);
+				GenerateCameraTarget();
+
+				GameObject dummy = new GameObject();
+
+				dummy.transform.position = transform.position;
+				dummy.transform.rotation = transform.rotation;
+				
+				dummy.transform.RotateAround(rotationTarget,-transform.right, Input.GetAxis("Mouse Y") * RotSpeed * Time.deltaTime);
+				dummy.transform.RotateAround(rotationTarget,Vector3.up, Input.GetAxis("Mouse X") * RotSpeed * Time.deltaTime);
+
+
+				if(dummy.transform.eulerAngles.z > 100 && dummy.transform.eulerAngles.z < 200) {}
+				else if(dummy.transform.eulerAngles.x >= PanAngleMin && dummy.transform.eulerAngles.x <= PanAngleMax)
+				{
+					transform.position = dummy.transform.position;
+					transform.rotation = dummy.transform.rotation;
+					//transform.RotateAround(rotationTarget,-transform.right, Input.GetAxis("Mouse Y") * RotSpeed * Time.deltaTime);
+				}
+				else
+					transform.RotateAround(rotationTarget,Vector3.up, Input.GetAxis("Mouse X") * RotSpeed * Time.deltaTime);
+
+				if(transform.eulerAngles.z > 10)
+					print (dummy.transform.eulerAngles + "/" + transform.eulerAngles);
+
+				td.position = new Vector3(Mathf.Clamp(transform.position.x,-LevelArea, LevelArea),
+				                          Mathf.Clamp(transform.position.y,ZoomMin, ZoomMax), 
+				                          Mathf.Clamp(transform.position.z,-LevelArea, LevelArea));
 				td.eulerAngles = transform.localEulerAngles;
-//				transform.rotation = Quaternion.Lerp (Quaternion.Euler(transform.eulerAngles), Quaternion.Euler(td.eulerAngles), Time.deltaTime * 15);
+				Destroy(dummy);
+			}
+			else
+			{
+				transform.position = Vector3.Lerp (transform.position, td.position, Time.deltaTime * smooth);
 			}
 		}
+
+//		void UpdateCamera()
+//		{
+//		Vector3 translation = Vector3.zero;
+//
+//			Quaternion direction = transform.rotation;
+//			direction.x = 0;
+//			direction.z = 0;
+//			print (direction * Vector3.forward );
+//
+//
+//
+//			// Move camera with arrow keys
+//			//translation += new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+//
+//			translation += Input.GetAxis("Horizontal") * (direction * Vector3.right);
+//			translation += Input.GetAxis("Vertical") * (direction * Vector3.forward);
+//			// Move camera with mouse
+//			if (Input.GetKey(KeyCode.Mouse1) && draggable) 
+//			{
+//				// Hold button and drag camera around
+//				translation -= new Vector3(Input.GetAxis("Mouse X") * DragSpeed * Time.deltaTime , 0,
+//				                           Input.GetAxis("Mouse Y") * DragSpeed * Time.deltaTime);
+//			}
+//			else if (mouseBorders)
+//			{
+//				// Move camera if mouse pointer reaches screen borders
+//				if (Input.mousePosition.x < ScrollArea)
+//				{
+//					translation += Vector3.right * -ScrollSpeed * Time.deltaTime;
+//				}
+//				
+//				if (Input.mousePosition.x >= Screen.width - ScrollArea)
+//				{
+//					translation += Vector3.right * ScrollSpeed * Time.deltaTime;
+//				}
+//				
+//				if (Input.mousePosition.y < ScrollArea)
+//				{
+//					translation += Vector3.forward * -ScrollSpeed * Time.deltaTime;
+//				}
+//				
+//				if (Input.mousePosition.y > Screen.height - ScrollArea)
+//				{
+//					translation += Vector3.forward * ScrollSpeed * Time.deltaTime;
+//				}
+//			}
+//			//print (transform.up);
+//			//translation = Camera.main.transform.TransformDirection(translation);
+//			//translation.y = 0;
+//
+//			if(Input.GetAxis("Mouse ScrollWheel")!=0)
+//			{
+//				float zoomDelta = Input.GetAxis("Mouse ScrollWheel") * ZoomSpeed * Time.deltaTime;
+//				
+//				if (zoomDelta!=0)
+//				{
+//					translation -= Vector3.up * ZoomSpeed * zoomDelta;
+//				}
+//				
+//				// Start panning camera if zooming in close to the ground or if just zooming out.
+//				float pan = transform.eulerAngles.x - zoomDelta * PanSpeed;
+//				pan = Mathf.Clamp(pan, PanAngleMin, PanAngleMax);
+//				
+//				if (zoomDelta < 0 || td.position.y < (ZoomMin+((ZoomMax-ZoomMin)/2)))
+//				{
+//					//camera.transform.eulerAngles = new Vector3(pan, 0, 0);
+//					//td.eulerAngles.x = (int)pan;
+//				}
+//				
+//			}
+//			//CAMERA MOVEMENT CONTROLS
+//			float MoveVertical = Input.GetAxis("Vertical")  * Time.deltaTime;
+//			float MoveHorizontal = Input.GetAxis("Horizontal") * Time.deltaTime;
+//			CameraHolder.transform.Translate (Vector3.forward * MoveVertical);
+//			CameraHolder.transform.Translate (Vector3.right * MoveHorizontal);
+//			float Rotation = Input.GetAxis("Mouse X");
+//			if (Input.GetKey(KeyCode.Mouse2))
+//			{
+//				CameraHolder.transform.Rotate(Vector3.up, Rotation * CameraRotateSpeed * Time.deltaTime,Space.World);
+//			}
+//			//Camera Rotation on Y axis
+//			if(Input.GetKey(KeyCode.Mouse2))
+//			{
+//				if(NewCameraRotation)
+//				{
+//
+//
+//
+//					Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+//					RaycastHit hit;
+//					
+//					(Physics.Raycast(mouseRay, out hit,100,LayerMask.NameToLayer("Floor")))
+//					if(Physics.Raycast(transform.position,transform.forward, out hit))
+//					{
+//					transform.RotateAround (new Vector3(0,transform.localEulerAngles.y,0),Vector3.up, Input.GetAxis("Mouse X") * Time.deltaTime * 20);
+//					Vector3 _direction = (Vector3.zero - transform.position).normalized;
+//					Quaternion lookRot = Quaternion.LookRotation(_direction);
+//					perform rotation-over-time on rot variable
+//					td.eulerAngles = lookRot.eulerAngles;
+//					transform.rotation = lookRot;
+//
+//					transform.Translate(Vector3.right * Time.deltaTime);
+//						rotationTarget = hit.point;
+//					}
+//					translation += transform.right * Input.GetAxis("Mouse X") ;
+//				}
+//				else
+//				{
+//					td.eulerAngles.y += Input.GetAxis("Mouse X") * RotSpeed;
+//				}
+//
+//			}
+//			
+//			// Keep camera within level and zoom area
+//			Vector3 desiredPosition = td.position + translation;
+//			if (desiredPosition.x < -LevelArea || LevelArea < desiredPosition.x)
+//			{
+//				translation.x = 0;
+//			}
+//			if (desiredPosition.y < ZoomMin || ZoomMax < desiredPosition.y)
+//			{
+//				translation.y = 0;
+//			}
+//			if (desiredPosition.z < -LevelArea || LevelArea < desiredPosition.z)
+//			{
+//				translation.z = 0;
+//			}
+//
+//			td.position += translation;
+//
+//
+//
+//			//transform.rotation = Quaternion.Lerp (Quaternion.Euler(transform.eulerAngles), Quaternion.Euler(td.eulerAngles), Time.deltaTime * 15);
+//			if(Input.GetKey(KeyCode.Mouse2) || Input.GetAxis("Mouse ScrollWheel")!=0)
+//			{
+//				GenerateCameraTarget();
+//				transform.position = Vector3.Slerp (transform.position, td.position, smooth);
+//				transform.LookAt(rotationTarget);
+//				td.eulerAngles = transform.localEulerAngles;
+//				transform.rotation = Quaternion.Lerp (Quaternion.Euler(transform.eulerAngles), Quaternion.Euler(td.eulerAngles), Time.deltaTime * 15);
+//			}else
+//				transform.position = Vector3.Lerp (transform.position, td.position, Time.deltaTime * smooth);
+//		}
 
 		IEnumerator PlayCinematique(Transform target)
 		{
@@ -282,6 +435,20 @@
 			
 			// Lerp the camera's rotation between it's current rotation and the rotation that looks at the player.
 			transform.rotation = Quaternion.Lerp(transform.rotation, lookAtRotation, smooth * Time.deltaTime);
+		}
+
+		void GenerateCameraTarget()
+		{
+			Ray ray = new Ray(transform.position,transform.forward);
+			// create a plane at 0,0,0 whose normal points to +Y:
+			Plane hPlane = new Plane(Vector3.up, Vector3.zero);
+			// Plane.Raycast stores the distance from ray.origin to the hit point in this variable:
+			float distance = 0; 
+			// if the ray hits the plane...
+			if (hPlane.Raycast(ray, out distance)){
+				// get the hit point:
+				rotationTarget = ray.GetPoint(distance);
+			}
 		}
 		#endregion
 	}

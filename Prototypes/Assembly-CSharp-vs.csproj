@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\2_Scripts\CameraController.cs" />
      <Compile Include="Assets\2_Scripts\PlayerController.cs" />
+     <Compile Include="Assets\2_Scripts\PointerProjector.cs" />
      <Compile Include="Assets\GameCamera\Content\Demo\Extra GUI Skins\SkinTest.cs" />
      <Compile Include="Assets\GameCamera\Content\Demo\Scripts\DemoMain.cs" />
      <Compile Include="Assets\GameCamera\Content\Demo\Scripts\DummyDemo.cs" />
@@ -177,6 +178,7 @@
      <None Include="Assets\GameCamera\Content\Demo\Shaders\Projector Light.shader" />
      <None Include="Assets\ProCore\Prototype\Shader\pb_UnlitVertexColor.shader" />
      <None Include="Assets\ProCore\Prototype\About\pc_AboutEntry_ProBuilder.txt" />
+     <None Include="Assets\5_Materials\Shaders\Projector Light.shader" />
      <None Include="Assets\ProCore\Prototype\Shader\pb_VertexShader.shader" />
      <None Include="Assets\ProCore\_README_PROTOTYPE.txt" />
      <None Include="Assets\ProCore\Prototype\Shader\DiffuseVertexColorEmission.shader" />

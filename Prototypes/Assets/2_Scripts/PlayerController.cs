@@ -114,17 +114,15 @@
 		}
 		
 		Vector3 RetrieveMousePosition()
-		{
+		{			
 			Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 
-			//(Physics.Raycast(mouseRay, out hit,100,LayerMask.NameToLayer("Floor")))
-			if(Physics.Raycast(mouseRay, out hit))
+			if (Physics.Raycast(mouseRay, out hit,Mathf.Infinity,1<<8))
 			{
-				//Debug.DrawRay(Camera.main.transform.position, hit.point, Color.red, 5, false);
+				PointerProjector.Instance.Project(hit.point,Color.white);
 				return hit.point;
 			}
-			
 			return transform.position;
 		}
 		#endregion
