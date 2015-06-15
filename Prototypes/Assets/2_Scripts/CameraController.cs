@@ -24,28 +24,28 @@
 		int LevelArea = 50;
 		[SerializeField]
 		[Tooltip("Move camera if mouse pointer reaches screen borders")]
-		int ScrollArea = 25;
+		int ScrollArea = 50;
 		[SerializeField]
-		int ScrollSpeed = 25;
+		int ScrollSpeed = 100;
 		[SerializeField]
 		int DragSpeed = 100;
 		
 		[SerializeField]
 		int ZoomSpeed = 25;
 		[SerializeField]
-		int ZoomMin = 25;
+		int ZoomMin = 1;
 		[SerializeField]
-		int ZoomMax = 50;
+		int ZoomMax = 60;
 		
 		[SerializeField]
-		int PanSpeed = 50;
+		int PanSpeed = 40;
 		[SerializeField]
-		int PanAngleMin = 50;
+		int PanAngleMin = 10;
 		[SerializeField]
 		int PanAngleMax = 80;
 
 		[SerializeField]
-		int RotSpeed = 25;
+		int RotSpeed = 100;
 		[SerializeField]
 		float smooth = 9f;
 
@@ -113,48 +113,52 @@
 		{
 			Vector3 translation = Vector3.zero;
 
+
+			Quaternion direction = transform.rotation;
+			direction.x = 0;
+			direction.z = 0;
+
+			Vector3 right = direction * Vector3.right;
+			Vector3 forward = direction * Vector3.forward;
+
 			/////////////////////////////////////////////////////   MOVE CAMERA      ////////////////////////////////////////////////////////////////
 
 			// Move camera with arrow keys
-			translation += Input.GetAxis("Horizontal") * Vector3.right;
-			translation += Input.GetAxis("Vertical") * Vector3.forward;
+			translation += Input.GetAxis("Horizontal") * right;
+			translation += Input.GetAxis("Vertical") * forward;
 
 			// Move camera with mouse
 			if (Input.GetKey(KeyCode.Mouse1) && draggable) 
 			{
 				// Hold button and drag camera around
-				translation -= Input.GetAxis("Mouse X") * DragSpeed * Time.deltaTime * Vector3.right;
-				translation -= Input.GetAxis("Mouse Y") * DragSpeed * Time.deltaTime * Vector3.forward;
+				translation -= Input.GetAxis("Mouse X") * DragSpeed * Time.deltaTime * right;
+				translation -= Input.GetAxis("Mouse Y") * DragSpeed * Time.deltaTime * forward;
 			}
 			else if (mouseBorders)
 			{
 				// Move camera if mouse pointer reaches screen borders
 				if (Input.mousePosition.x < ScrollArea)
 				{
-					translation += Vector3.right * -ScrollSpeed * Time.deltaTime;
+					translation += right * -ScrollSpeed * Time.deltaTime;
 				}
 				
 				if (Input.mousePosition.x >= Screen.width - ScrollArea)
 				{
-					translation += Vector3.right * ScrollSpeed * Time.deltaTime;
+					translation += right * ScrollSpeed * Time.deltaTime;
 				}
 				
 				if (Input.mousePosition.y < ScrollArea)
 				{
-					translation += Vector3.forward * -ScrollSpeed * Time.deltaTime;
+					translation += forward * -ScrollSpeed * Time.deltaTime;
 				}
 				
 				if (Input.mousePosition.y > Screen.height - ScrollArea)
 				{
-					translation += Vector3.forward * ScrollSpeed * Time.deltaTime;
+					translation += forward * ScrollSpeed * Time.deltaTime;
 				}
 			}
 
 			/////////////////////////////////////////////////////   ROTATE CAMERA     ///////////////////////////////////////////////////////////////////////////
-		
-
-			translation = Camera.main.transform.TransformDirection(translation);
-			translation.y = 0;
 
 			if(NewCameraRotation)
 			{
@@ -256,6 +260,7 @@
 			else
 			{
 				transform.position = Vector3.Lerp (transform.position, td.position, Time.deltaTime * smooth);
+				//transform.rotation = Quaternion.Lerp (Quaternion.Euler(transform.eulerAngles), Quaternion.Euler(td.eulerAngles), Time.deltaTime * smooth);
 			}
 		}
 

@@ -3,12 +3,6 @@
 	using UnityEngine;
 	using System.Collections;
 
-	public enum State {
-		Idle,
-		Walk,
-		Run,
-	}
-
 	[ExecuteInEditMode]
 	public class PlayerController : MonoBehaviour {
 		
@@ -22,9 +16,6 @@
 		float delay = 0.25F;
 		[SerializeField]
 		State state = State.Idle;
-
-
-		public NavMesh navmesh;
 
 		private float lastClickTimeL = 0F;
 		private float lastClickTimeR = 0F;
@@ -56,15 +47,20 @@
 
 			if (agent.hasPath)
 			{		
+				if(state == State.Idle)
+					state = State.Walk;
+				print ("walk 1");
 				//agent.updateRotation = false;
 				//set the rotation in the direction of movement
 				//transform.rotation = Quaternion.LookRotation(agent.desiredVelocity);
 				//set the navAgent's velocity to the velocity of the animation clip currently playing
 				//print(agent.desiredVelocity);
 
+				////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				agent.velocity = agent.desiredVelocity;
 				if(agent.remainingDistance < 3)
 					agent.velocity = Vector3.Normalize(agent.desiredVelocity) * agent.speed * agent.remainingDistance / 3;
+				////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //				if(double.IsNaN(pathDistance) || double.IsInfinity(pathDistance) || pathDistance <= 0.5F)
 //				{
@@ -79,8 +75,6 @@
 //						print(agent.remainingDistance + "  " + pathDistance);
 //						agent.velocity = Vector3.Normalize(agent.desiredVelocity) * agent.speed * agent.remainingDistance / pathDistance;
 //					}
-
-
 			}
 		}
 		#endregion

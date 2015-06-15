@@ -47,8 +47,18 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\2_Scripts\CameraController.cs" />
+     <Compile Include="Assets\2_Scripts\DonePlayerMovement.cs" />
+     <Compile Include="Assets\2_Scripts\EthanController.cs" />
      <Compile Include="Assets\2_Scripts\PlayerController.cs" />
      <Compile Include="Assets\2_Scripts\PointerProjector.cs" />
+     <Compile Include="Assets\FoV 2.0\Demo\Demo Scripts\CamLookAt.cs" />
+     <Compile Include="Assets\FoV 2.0\Demo\Demo Scripts\DemoChooser.cs" />
+     <Compile Include="Assets\FoV 2.0\Demo\Demo Scripts\Enemy.cs" />
+     <Compile Include="Assets\FoV 2.0\Demo\Demo Scripts\EnemyMobile.cs" />
+     <Compile Include="Assets\FoV 2.0\Demo\Demo Scripts\Player.cs" />
+     <Compile Include="Assets\FoV 2.0\Demo\Demo Scripts\SecurityCamController.cs" />
+     <Compile Include="Assets\FoV 2.0\Demo\Demo Scripts\TowerFOVController.cs" />
+     <Compile Include="Assets\FoV 2.0\Demo\Demo Scripts\Trony.cs" />
      <Compile Include="Assets\GameCamera\Content\Demo\Extra GUI Skins\SkinTest.cs" />
      <Compile Include="Assets\GameCamera\Content\Demo\Scripts\DemoMain.cs" />
      <Compile Include="Assets\GameCamera\Content\Demo\Scripts\DummyDemo.cs" />
@@ -168,8 +178,16 @@
      <Compile Include="Assets\GameCamera\Scripts\Utils\Popup.cs" />
      <Compile Include="Assets\GameCamera\Scripts\Utils\Profiler.cs" />
      <Compile Include="Assets\GameCamera\Scripts\Utils\RingPrimitive.cs" />
+     <Compile Include="Assets\Projects\ConeOfVisibility\ExampleScene\ConeDetectionExample.cs" />
+     <Compile Include="Assets\Projects\ConeOfVisibility\Scripts\AI\ConeOfDetection\AIConeDetection.cs" />
+     <Compile Include="Assets\Projects\ConeOfVisibility\Scripts\AI\Patrolling\EnemyAIDynamicPatrolling.cs" />
+     <Compile Include="Assets\Projects\ConeOfVisibility\Scripts\AI\Patrolling\EnemyAIStaticPatrolling.cs" />
+     <Compile Include="Assets\Projects\ConeOfVisibility\Scripts\AI\WayPointPathPatrolling\AIDynamicPatrolling.cs" />
+     <Compile Include="Assets\Projects\ConeOfVisibility\Scripts\AI\WayPointPathPatrolling\AIStaticPatrolling.cs" />
+     <Compile Include="Assets\Projects\ConeOfVisibility\Scripts\Utils\TimeCountManager.cs" />
      <None Include="Assets\ProCore\Prototype\About\changelog.txt" />
      <None Include="Assets\ProCore\Prototype\Shader\DiffuseVertexColor.shader" />
+     <None Include="Assets\6_Shaders\ReflectiveDiffuseSpecTransp.shader" />
      <None Include="Assets\ProCore\Shared\About\README.txt" />
      <None Include="Assets\ProCore\Prototype\Shader\DiffuseVertexColorTransparency.shader" />
      <None Include="Assets\ProCore\Prototype\Shader\pb_FaceHighlight.shader" />
@@ -178,7 +196,7 @@
      <None Include="Assets\GameCamera\Content\Demo\Shaders\Projector Light.shader" />
      <None Include="Assets\ProCore\Prototype\Shader\pb_UnlitVertexColor.shader" />
      <None Include="Assets\ProCore\Prototype\About\pc_AboutEntry_ProBuilder.txt" />
-     <None Include="Assets\5_Materials\Shaders\Projector Light.shader" />
+     <None Include="Assets\6_Shaders\Projector Light.shader" />
      <None Include="Assets\ProCore\Prototype\Shader\pb_VertexShader.shader" />
      <None Include="Assets\ProCore\_README_PROTOTYPE.txt" />
      <None Include="Assets\ProCore\Prototype\Shader\DiffuseVertexColorEmission.shader" />
@@ -186,17 +204,20 @@
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
+ <Reference Include="FoV_2.0">
+ <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/FoV 2.0/Plugin/FoV_2.0.dll</HintPath>
+ </Reference>
  <Reference Include="ProBuilderCore-Unity5">
- <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
+ <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderMeshOps-Unity5">
- <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
+ <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="ProCore">
- <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/ProCore/Shared/Code/ProCore.dll</HintPath>
+ <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Shared/Code/ProCore.dll</HintPath>
  </Reference>
  <Reference Include="pb_Profiler">
- <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/ProCore/Shared/pb_Profiler/pb_Profiler.dll</HintPath>
+ <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Shared/pb_Profiler/pb_Profiler.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iossupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
