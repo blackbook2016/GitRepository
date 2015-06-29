@@ -295,6 +295,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
+--- !u!1 &130814
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 430320}
+  m_Layer: 0
+  m_Name: Start
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &133520
 GameObject:
   m_ObjectHideFlags: 0
@@ -755,6 +770,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
+--- !u!1 &173650
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 428716}
+  m_Layer: 0
+  m_Name: End
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &176258
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,12 +938,29 @@ GameObject:
   - 114: {fileID: 11423080}
   - 114: {fileID: 11445364}
   - 64: {fileID: 6437220}
+  - 191: {fileID: 19198344}
   m_Layer: 8
   m_Name: plaque 14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!1 &199112
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 415096}
+  - 191: {fileID: 19138996}
+  m_Layer: 0
+  m_Name: Ladder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &404168
 Transform:
@@ -975,6 +1022,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 478560}
   m_RootOrder: 2
+--- !u!4 &415096
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 199112}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.03999996, y: 0, z: -11.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 430320}
+  - {fileID: 428716}
+  m_Father: {fileID: 478560}
+  m_RootOrder: 45
 --- !u!4 &415122
 Transform:
   m_ObjectHideFlags: 1
@@ -1071,6 +1132,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 478560}
   m_RootOrder: 10
+--- !u!4 &428716
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 173650}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .0900000036, y: 1.98099995, z: -1.00300002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 415096}
+  m_RootOrder: 1
 --- !u!4 &429368
 Transform:
   m_ObjectHideFlags: 1
@@ -1083,6 +1156,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 478560}
   m_RootOrder: 28
+--- !u!4 &430320
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 130814}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .103, y: 0, z: .671999991}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 415096}
+  m_RootOrder: 0
 --- !u!4 &430520
 Transform:
   m_ObjectHideFlags: 1
@@ -1426,6 +1511,7 @@ Transform:
   - {fileID: 447988}
   - {fileID: 432312}
   - {fileID: 418136}
+  - {fileID: 415096}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &486168
@@ -14642,9 +14728,17 @@ MonoBehaviour:
   areaError: 15
   hardAngle: 88
   packMargin: 20
-  m_selectedFaces: 
-  m_SelectedEdges: []
-  m_selectedTriangles: 
+  m_selectedFaces: 04000000
+  m_SelectedEdges:
+  - x: 16
+    y: 17
+  - x: 18
+    y: 16
+  - x: 17
+    y: 19
+  - x: 19
+    y: 18
+  m_selectedTriangles: 100000001100000012000000110000001300000012000000
   previousTransform: {x: 0, y: 0, z: 0}
   userCollisions: 0
   isSelectable: 1
@@ -20706,8 +20800,8 @@ MonoBehaviour:
       offset: {x: 0, y: 0}
       rotation: 0
       justify: 5
-      localPivot: {x: 2, y: 1}
-      localSize: {x: 4, y: 2}
+      localPivot: {x: 2, y: 1.5}
+      localSize: {x: 4, y: 3}
     _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
     manualUV: 0
     elementGroup: -1
@@ -20734,8 +20828,8 @@ MonoBehaviour:
       offset: {x: 0, y: 0}
       rotation: 0
       justify: 5
-      localPivot: {x: 2, y: 1}
-      localSize: {x: 4, y: 2}
+      localPivot: {x: 2, y: 1.5}
+      localSize: {x: 4, y: 3}
     _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
     manualUV: 0
     elementGroup: -1
@@ -20762,8 +20856,8 @@ MonoBehaviour:
       offset: {x: 0, y: 0}
       rotation: 0
       justify: 5
-      localPivot: {x: 2, y: 1}
-      localSize: {x: 4, y: 2}
+      localPivot: {x: 2, y: 1.5}
+      localSize: {x: 4, y: 3}
     _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
     manualUV: 0
     elementGroup: -1
@@ -20790,8 +20884,8 @@ MonoBehaviour:
       offset: {x: 0, y: 0}
       rotation: 0
       justify: 5
-      localPivot: {x: 2, y: 1}
-      localSize: {x: 4, y: 2}
+      localPivot: {x: 2, y: 1.5}
+      localSize: {x: 4, y: 3}
     _mat: {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
     manualUV: 0
     elementGroup: -1
@@ -20864,24 +20958,24 @@ MonoBehaviour:
   _vertices:
   - {x: 0, y: 0, z: 0}
   - {x: 4, y: 0, z: 0}
-  - {x: 0, y: 2, z: 0}
-  - {x: 4, y: 2, z: 0}
+  - {x: 0, y: 3, z: 0}
+  - {x: 4, y: 3, z: 0}
   - {x: 4, y: 0, z: 0}
   - {x: 4, y: 0, z: -4}
-  - {x: 4, y: 2, z: 0}
-  - {x: 4, y: 2, z: -4}
+  - {x: 4, y: 3, z: 0}
+  - {x: 4, y: 3, z: -4}
   - {x: 4, y: 0, z: -4}
   - {x: 0, y: 0, z: -4}
-  - {x: 4, y: 2, z: -4}
-  - {x: 0, y: 2, z: -4}
+  - {x: 4, y: 3, z: -4}
+  - {x: 0, y: 3, z: -4}
   - {x: 0, y: 0, z: -4}
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 2, z: -4}
-  - {x: 0, y: 2, z: 0}
-  - {x: 0, y: 2, z: 0}
-  - {x: 4, y: 2, z: 0}
-  - {x: 0, y: 2, z: -4}
-  - {x: 4, y: 2, z: -4}
+  - {x: 0, y: 3, z: -4}
+  - {x: 0, y: 3, z: 0}
+  - {x: 0, y: 3, z: 0}
+  - {x: 4, y: 3, z: 0}
+  - {x: 0, y: 3, z: -4}
+  - {x: 4, y: 3, z: -4}
   - {x: 0, y: 0, z: -4}
   - {x: 4, y: 0, z: -4}
   - {x: 0, y: 0, z: 0}
@@ -20889,20 +20983,20 @@ MonoBehaviour:
   _uv:
   - {x: 4, y: 0}
   - {x: 0, y: 0}
-  - {x: 4, y: 2}
-  - {x: 0, y: 2}
+  - {x: 4, y: 3}
+  - {x: 0, y: 3}
   - {x: 4, y: 0}
   - {x: 0, y: 0}
-  - {x: 4, y: 2}
-  - {x: 0, y: 2}
+  - {x: 4, y: 3}
+  - {x: 0, y: 3}
   - {x: 4, y: 0}
   - {x: 0, y: 0}
-  - {x: 4, y: 2}
-  - {x: 0, y: 2}
+  - {x: 4, y: 3}
+  - {x: 0, y: 3}
   - {x: 4, y: 0}
   - {x: 0, y: 0}
-  - {x: 4, y: 2}
-  - {x: 0, y: 2}
+  - {x: 4, y: 3}
+  - {x: 0, y: 3}
   - {x: 0, y: 4}
   - {x: 4, y: 4}
   - {x: 0, y: 0}
@@ -20942,9 +21036,17 @@ MonoBehaviour:
   areaError: 15
   hardAngle: 88
   packMargin: 20
-  m_selectedFaces: 
-  m_SelectedEdges: []
-  m_selectedTriangles: 
+  m_selectedFaces: 04000000
+  m_SelectedEdges:
+  - x: 16
+    y: 17
+  - x: 18
+    y: 16
+  - x: 17
+    y: 19
+  - x: 19
+    y: 18
+  m_selectedTriangles: 100000001100000012000000110000001300000012000000
   previousTransform: {x: 0, y: 0, z: 0}
   userCollisions: 0
   isSelectable: 1
@@ -23162,6 +23264,36 @@ MonoBehaviour:
   isSelectable: 1
   _name: Cube
   dontDestroyMeshOnDelete: 0
+--- !u!191 &19138996
+OffMeshLink:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 199112}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_AreaIndex: 0
+  m_Start: {fileID: 430320}
+  m_End: {fileID: 428716}
+  m_CostOverride: -1
+  m_BiDirectional: 1
+  m_Activated: 1
+  m_AutoUpdatePositions: 0
+--- !u!191 &19198344
+OffMeshLink:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187776}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_AreaIndex: 0
+  m_Start: {fileID: 0}
+  m_End: {fileID: 0}
+  m_CostOverride: -1
+  m_BiDirectional: 1
+  m_Activated: 1
+  m_AutoUpdatePositions: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

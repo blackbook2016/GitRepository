@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 08f843b5a5cf9ad46be8ffd92bdebe69
 ModelImporter:
-  serializedVersion: 16
+  serializedVersion: 18
   fileIDToRecycleName:
     100000: Chest
     100002: Head
@@ -167,6 +167,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     optimizeGameObjects: 0
+    motionNodeName: 
     animationCompression: 3
     animationRotationError: .5
     animationPositionError: .5
@@ -196,23 +197,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: .167682916
-        functionName: ClimbStart
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: ce7a80d520cacc042b5fe14f373d8173,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: .664634168
-        functionName: ClimbEnd
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: ce7a80d520cacc042b5fe14f373d8173,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask:
       - path: 
         weight: 1
@@ -381,11 +366,13 @@ ModelImporter:
     generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1
+    keepQuads: 0
     weldVertices: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
+    useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 1
@@ -1225,3 +1212,5 @@ ModelImporter:
   animationType: 3
   additionalBone: 0
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 

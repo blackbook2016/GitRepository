@@ -48,9 +48,16 @@
   <ItemGroup>
      <Compile Include="Assets\2_Scripts\CameraController.cs" />
      <Compile Include="Assets\2_Scripts\DonePlayerMovement.cs" />
+     <Compile Include="Assets\2_Scripts\EnemyController.cs" />
+     <Compile Include="Assets\2_Scripts\EnemyFieldOfView.cs" />
+     <Compile Include="Assets\2_Scripts\Entity\EnemyEntity.cs" />
+     <Compile Include="Assets\2_Scripts\Entity\States.cs" />
      <Compile Include="Assets\2_Scripts\EthanController.cs" />
+     <Compile Include="Assets\2_Scripts\FieldOfView.cs" />
      <Compile Include="Assets\2_Scripts\PlayerController.cs" />
      <Compile Include="Assets\2_Scripts\PointerProjector.cs" />
+     <Compile Include="Assets\2_Scripts\Waypoint.cs" />
+     <Compile Include="Assets\2_Scripts\WaypointManager.cs" />
      <Compile Include="Assets\FoV 2.0\Demo\Demo Scripts\CamLookAt.cs" />
      <Compile Include="Assets\FoV 2.0\Demo\Demo Scripts\DemoChooser.cs" />
      <Compile Include="Assets\FoV 2.0\Demo\Demo Scripts\Enemy.cs" />
@@ -185,39 +192,75 @@
      <Compile Include="Assets\Projects\ConeOfVisibility\Scripts\AI\WayPointPathPatrolling\AIDynamicPatrolling.cs" />
      <Compile Include="Assets\Projects\ConeOfVisibility\Scripts\AI\WayPointPathPatrolling\AIStaticPatrolling.cs" />
      <Compile Include="Assets\Projects\ConeOfVisibility\Scripts\Utils\TimeCountManager.cs" />
+     <Compile Include="Assets\SWS\Examples\Scripts\CameraInputDemo.cs" />
+     <Compile Include="Assets\SWS\Examples\Scripts\EventReceiver.cs" />
+     <Compile Include="Assets\SWS\Examples\Scripts\PathInputDemo.cs" />
+     <Compile Include="Assets\SWS\Examples\Scripts\RapidInputDemo.cs" />
+     <Compile Include="Assets\SWS\Examples\Scripts\RotationHelper.cs" />
+     <Compile Include="Assets\SWS\Examples\Scripts\RuntimeDemo.cs" />
+     <Compile Include="Assets\SWS\Examples\Scripts\ShowcaseGUI.cs" />
+     <Compile Include="Assets\SWS\Scripts\Helper\MoveAnimator.cs" />
+     <Compile Include="Assets\SWS\Scripts\Helper\PathIndicator.cs" />
+     <Compile Include="Assets\SWS\Scripts\Helper\PathRenderer.cs" />
+     <Compile Include="Assets\SWS\Scripts\Manager\BezierPathManager.cs" />
+     <Compile Include="Assets\SWS\Scripts\Manager\PathManager.cs" />
+     <Compile Include="Assets\SWS\Scripts\Manager\WaypointManager.cs" />
+     <Compile Include="Assets\SWS\Scripts\Movement\bezierMove.cs" />
+     <Compile Include="Assets\SWS\Scripts\Movement\navMove.cs" />
+     <Compile Include="Assets\SWS\Scripts\Movement\splineMove.cs" />
+     <None Include="Assets\SWS\README.txt" />
      <None Include="Assets\ProCore\Prototype\About\changelog.txt" />
+     <None Include="Assets\SWS\Plugins\DOTween\DOTween43.xml" />
      <None Include="Assets\ProCore\Prototype\Shader\DiffuseVertexColor.shader" />
      <None Include="Assets\6_Shaders\ReflectiveDiffuseSpecTransp.shader" />
+     <None Include="Assets\6_Shaders\Unlit-Normal.shader" />
      <None Include="Assets\ProCore\Shared\About\README.txt" />
      <None Include="Assets\ProCore\Prototype\Shader\DiffuseVertexColorTransparency.shader" />
      <None Include="Assets\ProCore\Prototype\Shader\pb_FaceHighlight.shader" />
      <None Include="Assets\ProCore\Prototype\Shader\UnlitSolidColor.shader" />
+     <None Include="Assets\SWS\Plugins\DOTween\DOTween46.xml" />
      <None Include="Assets\ProCore\Prototype\Shader\DiffuseTextureBlend.shader" />
+     <None Include="Assets\SWS\Plugins\DOTween\readme.txt" />
      <None Include="Assets\GameCamera\Content\Demo\Shaders\Projector Light.shader" />
      <None Include="Assets\ProCore\Prototype\Shader\pb_UnlitVertexColor.shader" />
+     <None Include="Assets\6_Shaders\Unlit With Shadows.shader" />
      <None Include="Assets\ProCore\Prototype\About\pc_AboutEntry_ProBuilder.txt" />
      <None Include="Assets\6_Shaders\Projector Light.shader" />
+     <None Include="Assets\SWS\Changelog.txt" />
      <None Include="Assets\ProCore\Prototype\Shader\pb_VertexShader.shader" />
      <None Include="Assets\ProCore\_README_PROTOTYPE.txt" />
      <None Include="Assets\ProCore\Prototype\Shader\DiffuseVertexColorEmission.shader" />
+     <None Include="Assets\SWS\Plugins\DOTween\DOTween50.xml" />
      <None Include="Assets\ProCore\Prototype\About\Credits.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="FoV_2.0">
- <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/FoV 2.0/Plugin/FoV_2.0.dll</HintPath>
+ <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/FoV 2.0/Plugin/FoV_2.0.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderCore-Unity5">
- <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
+ <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderMeshOps-Unity5">
- <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
+ <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="ProCore">
- <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Shared/Code/ProCore.dll</HintPath>
+ <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/ProCore/Shared/Code/ProCore.dll</HintPath>
  </Reference>
  <Reference Include="pb_Profiler">
- <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Shared/pb_Profiler/pb_Profiler.dll</HintPath>
+ <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/ProCore/Shared/pb_Profiler/pb_Profiler.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween">
+ <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/SWS/Plugins/DOTween/DOTween.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween50">
+ <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/SWS/Plugins/DOTween/DOTween50.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween46">
+ <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/SWS/Plugins/DOTween/DOTween46.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween43">
+ <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/SWS/Plugins/DOTween/DOTween43.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iossupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

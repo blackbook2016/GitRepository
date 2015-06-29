@@ -81,21 +81,40 @@
      <Compile Include="Assets\ProCore\Shared\About\Editor\pb_AboutWindow.cs" />
      <Compile Include="Assets\ProCore\Shared\pb_Profiler\Editor\Tests\TestProfiler.cs" />
      <Compile Include="Assets\ProCore\Shared\pb_Profiler\Editor\pb_Profiler_Interface.cs" />
+     <Compile Include="Assets\SWS\Scripts\Editor\AboutSWSEditor.cs" />
+     <Compile Include="Assets\SWS\Scripts\Editor\BezierPathEditor.cs" />
+     <Compile Include="Assets\SWS\Scripts\Editor\CreateWPManager.cs" />
+     <Compile Include="Assets\SWS\Scripts\Editor\PathEditor.cs" />
+     <Compile Include="Assets\SWS\Scripts\Editor\ReviewConfig.cs" />
+     <Compile Include="Assets\SWS\Scripts\Editor\ReviewWindowEditor.cs" />
+     <Compile Include="Assets\SWS\Scripts\Editor\WaypointEditor.cs" />
+     <Compile Include="Assets\SWS\Scripts\Editor\bezierMoveEditor.cs" />
+     <Compile Include="Assets\SWS\Scripts\Editor\moveEditor.cs" />
+     <Compile Include="Assets\SWS\Scripts\Editor\navMoveEditor.cs" />
+     <Compile Include="Assets\SWS\Scripts\Editor\splineMoveEditor.cs" />
+     <None Include="Assets\SWS\README.txt" />
      <None Include="Assets\ProCore\Prototype\About\changelog.txt" />
+     <None Include="Assets\SWS\Plugins\DOTween\DOTween43.xml" />
      <None Include="Assets\ProCore\Prototype\Shader\DiffuseVertexColor.shader" />
      <None Include="Assets\6_Shaders\ReflectiveDiffuseSpecTransp.shader" />
+     <None Include="Assets\6_Shaders\Unlit-Normal.shader" />
      <None Include="Assets\ProCore\Shared\About\README.txt" />
      <None Include="Assets\ProCore\Prototype\Shader\DiffuseVertexColorTransparency.shader" />
      <None Include="Assets\ProCore\Prototype\Shader\pb_FaceHighlight.shader" />
      <None Include="Assets\ProCore\Prototype\Shader\UnlitSolidColor.shader" />
+     <None Include="Assets\SWS\Plugins\DOTween\DOTween46.xml" />
      <None Include="Assets\ProCore\Prototype\Shader\DiffuseTextureBlend.shader" />
+     <None Include="Assets\SWS\Plugins\DOTween\readme.txt" />
      <None Include="Assets\GameCamera\Content\Demo\Shaders\Projector Light.shader" />
      <None Include="Assets\ProCore\Prototype\Shader\pb_UnlitVertexColor.shader" />
+     <None Include="Assets\6_Shaders\Unlit With Shadows.shader" />
      <None Include="Assets\ProCore\Prototype\About\pc_AboutEntry_ProBuilder.txt" />
      <None Include="Assets\6_Shaders\Projector Light.shader" />
+     <None Include="Assets\SWS\Changelog.txt" />
      <None Include="Assets\ProCore\Prototype\Shader\pb_VertexShader.shader" />
      <None Include="Assets\ProCore\_README_PROTOTYPE.txt" />
      <None Include="Assets\ProCore\Prototype\Shader\DiffuseVertexColorEmission.shader" />
+     <None Include="Assets\SWS\Plugins\DOTween\DOTween50.xml" />
      <None Include="Assets\ProCore\Prototype\About\Credits.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
@@ -104,25 +123,25 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/Editor/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="FoV_2.0_Editor">
- <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/Editor/FoV/FoV_2.0_Editor.dll</HintPath>
+ <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/Editor/FoV/FoV_2.0_Editor.dll</HintPath>
  </Reference>
  <Reference Include="FoV_2.0">
- <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/FoV 2.0/Plugin/FoV_2.0.dll</HintPath>
+ <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/FoV 2.0/Plugin/FoV_2.0.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderCore-Unity5">
- <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
+ <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderMeshOps-Unity5">
- <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
+ <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderEditor-Unity5">
- <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Prototype/Editor/ProBuilderEditor-Unity5.dll</HintPath>
+ <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/ProCore/Prototype/Editor/ProBuilderEditor-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="ProCore">
- <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Shared/Code/ProCore.dll</HintPath>
+ <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/ProCore/Shared/Code/ProCore.dll</HintPath>
  </Reference>
  <Reference Include="pb_Profiler">
- <HintPath>C:/Users/St-Arnaud-1b/GitRepository/Prototypes/Assets/ProCore/Shared/pb_Profiler/pb_Profiler.dll</HintPath>
+ <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/ProCore/Shared/pb_Profiler/pb_Profiler.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
@@ -156,6 +175,21 @@
  </Reference>
  <Reference Include="UnityEditor.OSXStandalone.Extensions">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/macstandalonesupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween">
+ <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/SWS/Plugins/DOTween/DOTween.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween50">
+ <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/SWS/Plugins/DOTween/DOTween50.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween46">
+ <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/SWS/Plugins/DOTween/DOTween46.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTweenEditor">
+ <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/SWS/Plugins/DOTween/Editor/DOTweenEditor.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween43">
+ <HintPath>C:/Users/St-Arnaud-1b/Unity3DProjects/GitRepository/Prototypes/Assets/SWS/Plugins/DOTween/DOTween43.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iossupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

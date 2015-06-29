@@ -11,13 +11,13 @@ NavMeshAreas:
     cost: 1
   - name: Jump
     cost: 2
-  - name: 
+  - name: Area1
     cost: 1
-  - name: 
+  - name: Area2
     cost: 1
-  - name: 
+  - name: Area3
     cost: 1
-  - name: 
+  - name: Area4
     cost: 1
   - name: 
     cost: 1

@@ -3,13 +3,6 @@
 	using UnityEngine;
 	using System.Collections;
 	
-	public enum State {
-		Idle,
-		Walk,
-		Run,
-		Climb,
-	}
-	
 	[RequireComponent (typeof (NavMeshAgent), typeof (Animator))]
 	public class EthanController : MonoBehaviour {
 		
@@ -19,6 +12,8 @@
 		float delay = 0.25F;
 		[SerializeField]
 		State state = State.Idle;
+		[SerializeField]
+		PlayerState plState = PlayerState.Free;
 		
 		private float lastClickTimeL = 0F;
 		private float lastClickTimeR = 0F;
@@ -29,6 +24,7 @@
 
 		private NavMeshAgent agent;
 		private Animator animator;
+		private TargetDestination initDes;
 
 		#endregion
 		
@@ -39,35 +35,44 @@
 			animator = GetComponent<Animator>();
 
 			agent.autoTraverseOffMeshLink = false;
+
+			initDes.position = transform.position;
+			initDes.eulerAngles = transform.eulerAngles;
 		}	
 		
 		void Update () 
 		{
-			if(state != State.Idle && agent.remainingDistance == 0 && state != State.Climb)
-				state = State.Idle;
-
-			if(state != State.Climb)
+			if(plState == PlayerState.Free)
 			{
-				if(Input.GetKeyDown(KeyCode.Mouse0))	
-					MovePlayer();
+				if(transform.position.x >= 20 || transform.position.x <= -20)
+					isCaught();
 
-				if(Input.GetKeyDown(KeyCode.Mouse1))
-					lastClickTimeR = Time.time;
+				if(state != State.Idle && agent.remainingDistance == 0 && state != State.Climb)
+					state = State.Idle;
+
+				if(state != State.Climb)
+				{
+					if(Input.GetKeyDown(KeyCode.Mouse0))	
+						MovePlayer();
+
+					if(Input.GetKeyDown(KeyCode.Mouse1))
+						lastClickTimeR = Time.time;
+					
+					if(Input.GetKeyUp(KeyCode.Mouse1) && Time.time < lastClickTimeR + delay)
+						StopPlayer();
+				}
 				
-				if(Input.GetKeyUp(KeyCode.Mouse1) && Time.time < lastClickTimeR + delay)
-					StopPlayer();
-			}
-			
-			
-			if (agent.hasPath)
-			{		
-				if(state == State.Idle)
-					state = State.Walk;
-			}
-			if(agent.isOnOffMeshLink && state != State.Climb)
-			{
-				StopCoroutine(SelectLinkAnimation());
-				StartCoroutine(SelectLinkAnimation());
+				
+				if (agent.hasPath)
+				{		
+					if(state == State.Idle)
+						state = State.Walk;
+				}
+				if(agent.isOnOffMeshLink && state != State.Climb)
+				{
+					StopCoroutine(SelectLinkAnimation());
+					StartCoroutine(SelectLinkAnimation());
+				}
 			}
 			
 			animator.SetInteger("MoveState", (int)state);
@@ -75,7 +80,7 @@
 		
 		void OnAnimatorMove ()
 		{
-			if (state != State.Idle && state != State.Climb)
+			if (state != State.Idle && state != State.Climb && plState != PlayerState.Caught)
 			{
 				agent.velocity = animator.deltaPosition / Time.deltaTime;
 				
@@ -100,11 +105,13 @@
 			{
 				state = State.Run;
 			}
-			else if(state != State.Walk && Time.time - lastClickTimeL >= delay)
+			else if(state != State.Walk && Time.time - lastClickTimeL >= delay && Input.GetKeyDown(KeyCode.Mouse0))
 			{
 				state = State.Walk;
 			}
-			lastClickTimeL = Time.time;
+
+			if(Input.GetKeyDown(KeyCode.Mouse0))
+				lastClickTimeL = Time.time;
 		}
 		
 		private void StopPlayer()
@@ -112,19 +119,26 @@
 			agent.SetDestination(transform.position);
 			state = State.Idle;
 		}
-		
+
+		public void isCaught()
+		{
+			if(state != State.Climb)
+				agent.Warp(initDes.position);
+		}
+
 		private Vector3 RetrieveMousePosition()
 		{			
 			Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 			
-			if (Physics.Raycast(mouseRay, out hit,Mathf.Infinity,1<<8))
+			if (Physics.Raycast(mouseRay, out hit,Mathf.Infinity,1 << 8))
 			{
 				PointerProjector.Instance.Project(hit.point,Color.white);
 				return hit.point;
 			}
 			return transform.position;
 		}
+
 
 		private IEnumerator Locomotion_ClimbAnimation() 
 		{
