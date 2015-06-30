@@ -41,13 +41,13 @@
 			
 			navAgent = GetComponent<NavMeshAgent>();
 
-			InvokeRepeating ("UpdateFoV", 0, 0.01f);
-
 			defaultAlpha = GetComponentInChildren<MeshRenderer>().material.color.a;		
 
 			waypointManager = GameObject.FindGameObjectWithTag("WaypointManager").GetComponent<WaypointManager>();		
 			
 			SetEnemy();
+			
+			InvokeRepeating ("UpdateFoV", 0, 0.01f);
 		}
 
 		void OnAnimatorMove ()
@@ -112,11 +112,11 @@
 				}
 			}
 
-			if(enemy.Type == EnemyType._RoamingPath  && navAgent.desiredVelocity.magnitude == 0)
+			if(enemy.Type == EnemyType._RoamingPath && Vector3.Distance(transform.position,navAgent.destination) <= 0.1F)
 			{
 				waypointManager.SetNextPoint();
-				if(waypointManager.wpType == WaypointType.None)
-				navAgent.SetDestination(waypointManager.TargetPoint.transform.position);
+
+				navAgent.SetDestination(waypointManager.NextPoint.transform.position);
 			}
 						
 			anim.SetInteger("MoveState",(int)enemy.MoveState);
@@ -152,8 +152,10 @@
 			enemy.SwitchType(enemyType);
 			enemy.Fov = GetComponentInChildren<FieldOfView>();
 			enemy.Fov.canSearch = enemy.CanSearch;	
-			print(enemy.Type + " " + enemy.CanRoam);
-			if(enemy.CanRoam)
+			
+			initPos = transform.position;
+
+			if(enemy.Type == EnemyType._RoamingRandom)
 			{
 				Vector3 point;
 				if (RandomPoint(transform.position, range, out point))
@@ -162,8 +164,10 @@
 					Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f);
 				}
 			}
-			
-			initPos = transform.position;
+			if(enemy.Type == EnemyType._RoamingPath )
+			{
+				navAgent.SetDestination(waypointManager.NextPoint.transform.position);
+			}
 		}
 
 		bool RandomPoint(Vector3 center, float range, out Vector3 result)

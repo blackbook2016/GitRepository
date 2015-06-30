@@ -6,35 +6,75 @@
 
 	public enum WaypointType{
 		None,
-		Loop,
 		ClosedLoop,
 		PingPong,
+		RandomPath,
 	}
 
 	public class WaypointManager : MonoBehaviour 
 	{
 		#region Properties
-		public WaypointType wpType;
+		public WaypointType wpType = WaypointType.None;
 		public List<Waypoint> points;
 		
-		private Waypoint targetPoint;
-		private Waypoint StartPoint;
-		private Waypoint EndPoint;
+		private Waypoint nextPoint;
+		private Waypoint StartPoint = null;
+		private Waypoint EndPoint = null;
 
-		private bool direction = true;
-
+		public bool direction = true;
+		private int currentPosition;
+		private WaypointType guizmosType = WaypointType.None;
 		#endregion
 		#region Editor API
 		void OnDrawGizmosSelected()
 		{
-			if(points.Count == transform.childCount)
+			if(points.Count == transform.childCount && EndPoint != null && guizmosType == wpType)
 			{
 				Gizmos.color = Color.blue;
-				Waypoint prevPoint = points[points.Count -1];
-				foreach(Waypoint point in points)
-				{
-					Gizmos.DrawLine(point.transform.position, prevPoint.transform.position);
-					prevPoint = point;
+				Waypoint currentpoint = StartPoint;
+					switch (wpType)
+					{
+					case WaypointType.None:
+					{
+						while(currentpoint != EndPoint)
+						{
+							nextPoint = points[points.IndexOf(currentpoint) + 1];
+							Gizmos.DrawLine(currentpoint.transform.position, nextPoint.transform.position);
+							currentpoint = nextPoint;
+						}
+						break;
+					}
+					case WaypointType.ClosedLoop:
+					{			
+
+						while(currentpoint != EndPoint)
+						{
+							nextPoint = points[points.IndexOf(currentpoint) + 1];
+							Gizmos.DrawLine(currentpoint.transform.position, nextPoint.transform.position);
+							currentpoint = nextPoint;
+						}
+					Gizmos.DrawLine(StartPoint.transform.position, EndPoint.transform.position);
+						break;
+					}
+					case WaypointType.PingPong:
+					{
+						while(currentpoint != EndPoint)
+						{
+							nextPoint = points[points.IndexOf(currentpoint) + 1];
+							Gizmos.DrawLine(currentpoint.transform.position, nextPoint.transform.position);
+							currentpoint = nextPoint;
+						}
+						break;
+					}
+					case WaypointType.RandomPath:
+					{
+					for(int i = points.IndexOf(StartPoint); i < points.IndexOf(EndPoint); i++)
+					{
+						for(int y = i+1; y <= points.IndexOf(EndPoint); y++)
+							Gizmos.DrawLine(points[i].transform.position, points[y].transform.position);
+					}
+						break;
+					}
 				}
 			}
 			else
@@ -42,54 +82,67 @@
 		}
 		#endregion
 		#region Unity
-		void Start() 
+		void Awake() 
 		{
 			Refresh();
 		}
 		#endregion
 
 		#region API
-		public Waypoint TargetPoint
+		public Waypoint NextPoint
 		{
 			get
 			{
-				return targetPoint;
+				return nextPoint;
 			}
 		}
 		
 		public void SetNextPoint()
 		{
-			if(wpType != WaypointType.PingPong )
+			if(EndPoint == null || StartPoint == null)
 			{
-				if (points.IndexOf(targetPoint) == points.Count - 1)
-				{
-					targetPoint = points[0];
-				}
-				// if next point is the endpoint
-				if(EndPoint == points[points.IndexOf(targetPoint) + 1])
-				{
-					if (wpType == WaypointType.None)
-						targetPoint = EndPoint;
-					else if (wpType == WaypointType.ClosedLoop || wpType == WaypointType.Loop)
-						targetPoint = StartPoint;
-				}
+				print ("Path endpoint or startpoint aren't defined");
 			}
-			else
+			currentPosition = points.IndexOf(nextPoint);
+
+			switch (wpType)
 			{
-				if(direction)
-				{				
-					if(EndPoint == points[points.IndexOf(targetPoint) + 1])
-					{
-						direction = !direction;
-						if(points.IndexOf(targetPoint) - 1 == -1)
-							targetPoint = points[points.Count - 1];
-					}
-				}else
+			case WaypointType.None:
+			{
+				if(currentPosition == points.IndexOf(EndPoint))
+					nextPoint = EndPoint;
+				else 
+					nextPoint = points[points.IndexOf(nextPoint) + 1];
+				break;
+			}
+			case WaypointType.ClosedLoop:
+			{			
+				if (currentPosition + 1 > points.Count - 1)
 				{
-
+					nextPoint = points[0];
+				}				
+				else 
+					nextPoint = points[points.IndexOf(nextPoint) + 1];
+				break;
+			}
+			case WaypointType.PingPong:
+			{
+				if(currentPosition == points.IndexOf(EndPoint) || (currentPosition == 0 && !direction))
+				{
+					direction = !direction;
 				}
-
-
+				if(direction)
+					nextPoint = points[currentPosition+1];
+				else
+					nextPoint = points[currentPosition-1];
+				print(currentPosition);
+				break;
+			}
+			case WaypointType.RandomPath:
+			{
+				nextPoint = points[Random.Range(0, points.IndexOf(EndPoint) + 1)];
+				break;
+			}
 			}
 
 		}
@@ -110,8 +163,9 @@
 				else if(waypoint.pointType == PointType.End)
 					EndPoint = waypoint;
 			}			
-			
-			targetPoint = StartPoint;
+
+			nextPoint = StartPoint;
+			guizmosType = wpType;
 		}
 		#endregion		
 	}

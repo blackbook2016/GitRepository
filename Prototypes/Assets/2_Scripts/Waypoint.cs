@@ -14,7 +14,7 @@
 		public PointType pointType = PointType.Path;
 
 		#region Editor API
-		void OnDrawGizmosSelected()
+		void OnDrawGizmos()
 		{
 			if(pointType == PointType.Path)
 				Gizmos.color = Color.blue;
